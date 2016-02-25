@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name BitBucket Pull Request Toggle Buttons
 // @author Gordon Myers
-// @version 0.5.1.0
+// @version 0.5.1.1
 // @match https://bitbucket.org/*/pull-request*
 // ==/UserScript==
 window.addEventListener('load', function() {
@@ -17,6 +17,15 @@ window.addEventListener('load', function() {
 		button1.innerHTML = 'Activate Toggle';
 		button1.id = 'fr-toggle-enable';
 		buttonContainer.appendChild(button1);
+		
+		var ignoreWhitespaceRegex = new RegExp('[?&]w=1');
+		if (!ignoreWhitespaceRegex.test(document.location.toString())) {
+			var button2 = document.createElement('button');
+			button2.className = 'aui-button';
+			button2.innerHTML = 'Ignore Spacing';
+			button2.id = 'fr-ignore-whitespace';
+			buttonContainer.appendChild(button2);
+		}
 		
 		buttons.insertBefore(buttonContainer, buttons.childNodes[0]);
         
@@ -68,5 +77,26 @@ window.addEventListener('load', function() {
             }
         });
 		
+		if (button2) {
+			button2.addEventListener('click', function() {
+				var url = document.location.toString();
+				var hashPosition = url.indexOf('#');
+				if (hashPosition > -1) {
+					var remaining = url.length - hashPosition;
+					var before = url.substr(0, hashPosition);
+					var after = url.substr(hashPosition, remaining);
+				} else {
+					var before = url;
+					var after = "";
+				}
+				var queryPosition = before.indexOf('?');
+				if (queryPosition > -1) {
+					before += '&w=1';
+				} else {
+					before += '?w=1';
+				}
+				document.location = before + after;
+			});
+		}
     }
 }, false);

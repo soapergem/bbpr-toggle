@@ -1,7 +1,7 @@
 {
   "name": "BitBucket Pull Request Toggle Buttons",
   "short_name": "Toggle Buttons",
-  "version": "0.5.1.0",
+  "version": "0.5.1.1",
   "description": "Adds Toggle buttons for files in BitBucket Pull Requests",
   "homepage_url": "http://gordon-myers.com/bbprtb",
   "manifest_version": 2,
