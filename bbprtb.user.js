@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name BitBucket Pull Request Toggle Buttons
 // @author Gordon Myers
-// @version 0.5.1.2
+// @version 0.5.1.3
 // @match https://bitbucket.org/*/pull-request*
 // ==/UserScript==
 window.addEventListener('load', function () {
@@ -25,9 +25,9 @@ window.addEventListener('load', function () {
 	whitespaceButton.id = 'fr-ignore-whitespace';
 	var isIgnoringWhitespace = /[?&]w=1/.test(document.location.toString());
 	if (isIgnoringWhitespace) {
-		whitespaceButton.innerHTML = 'Ignore Spacing';
-	} else {
 		whitespaceButton.innerHTML = 'Show Spacing';
+	} else {
+		whitespaceButton.innerHTML = 'Ignore Spacing';
 	}
 	buttonContainer.appendChild(whitespaceButton);
 
